@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>大前端日常总结</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="larval+vue+jq+h5踩坑总结##上传图片 ###【1】ios在上传图片的change事件触发  原因——事件不能用原生的来绑定，一定要@change=”fn” 解决方法——1&amp;lt; input type=&amp;quot;file&amp;quot;  @click=&amp;quot;fn&amp;quot; &amp;gt;   ###【2】ios点击上传的时候只调用起这个相机，这个调用起相册  原因——在安卓里in">
+<meta property="og:type" content="article">
+<meta property="og:title" content="大前端日常总结">
+<meta property="og:url" content="http://yoursite.com/2018/12/04/iview踩坑总结/index.html">
+<meta property="og:site_name" content="大前端日常总结">
+<meta property="og:description" content="larval+vue+jq+h5踩坑总结##上传图片 ###【1】ios在上传图片的change事件触发  原因——事件不能用原生的来绑定，一定要@change=”fn” 解决方法——1&amp;lt; input type=&amp;quot;file&amp;quot;  @click=&amp;quot;fn&amp;quot; &amp;gt;   ###【2】ios点击上传的时候只调用起这个相机，这个调用起相册  原因——在安卓里in">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-12-03T12:46:07.252Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="大前端日常总结">
+<meta name="twitter:description" content="larval+vue+jq+h5踩坑总结##上传图片 ###【1】ios在上传图片的change事件触发  原因——事件不能用原生的来绑定，一定要@change=”fn” 解决方法——1&amp;lt; input type=&amp;quot;file&amp;quot;  @click=&amp;quot;fn&amp;quot; &amp;gt;   ###【2】ios点击上传的时候只调用起这个相机，这个调用起相册  原因——在安卓里in">
+  
+    <link rel="alternate" href="/atom.xml" title="大前端日常总结" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">大前端日常总结</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-iview踩坑总结" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/12/04/iview踩坑总结/" class="article-date">
+  <time datetime="2018-12-04T08:23:16.930Z" itemprop="datePublished">2018-12-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="larval-vue-jq-h5踩坑总结"><a href="#larval-vue-jq-h5踩坑总结" class="headerlink" title="larval+vue+jq+h5踩坑总结"></a>larval+vue+jq+h5踩坑总结</h1><p>##上传图片</p>
+<p>###【1】ios在上传图片的change事件触发</p>
+<ul>
+<li>原因——事件不能用原生的来绑定，一定要@change=”fn”</li>
+<li>解决方法——<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt; input type=&quot;file&quot;  @click=&quot;fn&quot; &gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>###【2】ios点击上传的时候只调用起这个相机，这个调用起相册</p>
+<ul>
+<li>原因——在安卓里input要加上capture属性，才能调用起相册，而ios里必须去掉</li>
+<li>解决方法——<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//判断ios | 安卓 添加capture属性</span><br><span class="line">add_capture () &#123;</span><br><span class="line">	if (!isiOS) &#123;</span><br><span class="line">		//如果是安卓就加上capture</span><br><span class="line">		$(&apos;input[name=&quot;upload&quot;&apos;)[0].setAttribute(&quot;capture&quot;,&quot;camera&quot;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Simditor的坑"><a href="#Simditor的坑" class="headerlink" title="Simditor的坑"></a>Simditor的坑</h2><p>###【1】Simditor编辑器上传图片时的事件和执行顺序</p>
+<ul>
+<li>注意——</li>
+<li>1.uploadprogress事件在上传中是多次执行的</li>
+<li>2.上传图片失败后，执行uploaderror事件，但是就不再执行uploadready事件</li>
+<li>3.同时上传3张图片，uploadcomplete事件也会执行3次<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//图片上传之前执行</span><br><span class="line">editor.uploader.on(&apos;beforeupload&apos;,() =&gt; &#123;&#125;)</span><br><span class="line">//图片上传时</span><br><span class="line">editor.uploader.on(&apos;uploadprogress&apos;,(file, loaded, total) =&gt; &#123;&#125;)</span><br><span class="line">//图片上传完成之后调用</span><br><span class="line">editor.uploader.on(&apos;uploadcomplete&apos;, (res, file, mask) =&gt; &#123;&#125;)</span><br><span class="line">//图片上传失败</span><br><span class="line">editor.uploader.on(&apos;uploaderror&apos;,(file, xhr, status) =&gt; &#123;&#125;)</span><br><span class="line">//渲染正文完成后执行</span><br><span class="line">editor.uploader.on(&apos;uploadready&apos;,(file, result) =&gt; &#123;&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="【2】获取上传图片返回的url地址"><a href="#【2】获取上传图片返回的url地址" class="headerlink" title="【2】获取上传图片返回的url地址"></a>【2】获取上传图片返回的url地址</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//图片上传成功之后调用</span><br><span class="line">editor.uploader.on(&apos;uploadcomplete&apos;, (res, file, mask) =&gt; &#123;</span><br><span class="line">  //在mask里面拿图片的url</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="【3】获取上传图片的状态值"><a href="#【3】获取上传图片的状态值" class="headerlink" title="【3】获取上传图片的状态值"></a>【3】获取上传图片的状态值</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">  //创建富文本编辑的实例</span><br><span class="line">var editor = new Simditor(&#123;</span><br><span class="line">    upload: &#123;</span><br><span class="line">        url: API.API_MOBILE_UPLOAD_IMAGE,</span><br><span class="line">        params: &#123; _token: csrf_token &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;)</span><br><span class="line">//获取上传状态值 (true为上传中，false为不在上传中)</span><br><span class="line">editor.uploader.uploading</span><br></pre></td></tr></table></figure>
+<p>##节流和防抖</p>
+<p>###【1】节流和防抖</p>
+<ul>
+<li>节流：规定一个单位时间，在这个单位时间内，只能有一次触发事件的回调函数执行，如果在同一个单位时间内某事件被触发多次，只有一次能生效<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">export const Throttle = (fn, t) =&gt; &#123;</span><br><span class="line">    let last</span><br><span class="line">    let timer</span><br><span class="line">    let interval = t || 500</span><br><span class="line">    return function () &#123;</span><br><span class="line">        let args = arguments</span><br><span class="line">        let now = +new Date()</span><br><span class="line">        if (last &amp;&amp; now - last &lt; interval) &#123;</span><br><span class="line">            clearTimeout(timer)</span><br><span class="line">            timer = setTimeout(() =&gt; &#123;</span><br><span class="line">                last = now</span><br><span class="line">                fn.apply(this, args)</span><br><span class="line">            &#125;, interval)</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            last = now</span><br><span class="line">            fn.apply(this, args)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//在创建了vue实例的js文件里</span><br><span class="line"></span><br><span class="line">//按需引入Throttle，然后</span><br><span class="line">import &#123;Throttle&#125; from &quot;../_throttle.js&quot;;</span><br><span class="line"></span><br><span class="line">var app = new Vue(&#123;</span><br><span class="line">    el: &apos;#app&apos;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        submitReply: Throttle(function()&#123;</span><br><span class="line">            //提交发布</span><br><span class="line">            //...</span><br><span class="line">        &#125;, 1000),</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/12/04/iview踩坑总结/" data-id="cjp9hs6ke000194atn33w34db" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/12/04/larval+h5踩坑总结 -/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/12/04/iview踩坑总结/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/04/larval+h5踩坑总结 -/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/04/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 飞天女猪侠<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
